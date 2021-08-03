@@ -1,0 +1,131 @@
+\documentclass[a4paper,12pt,titlepage]{article}
+\usepackage[utf8]{inputenc} 
+\usepackage{tikz,pgf}
+\usepackage{indentfirst}
+\usepackage{amsfonts}
+\usepackage[english]{babel}
+
+
+%Url e Bookmarks of output PDF 
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	%	pdftitle={Document title},
+	bookmarks=true,
+	%pdfpagemode=FullScreen,
+}
+
+
+
+
+\usepackage{rotating}
+
+\usepackage{tabularx}
+\usepackage{multirow} 
+\usepackage{lscape}
+\usepackage{tikz}
+%to insert PDF files
+\usepackage[final]{pdfpages}
+%--Packages--
+
+\usepackage{eurosym}
+\usepackage{graphicx} \usepackage{verbatim}
+\usepackage{graphics}
+\usepackage{tikz,pgf}
+\usepackage{indentfirst}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsmath,amssymb,amsthm,textcomp}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{amsmath,amssymb,mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx,color,listings}
+\frenchspacing 
+\usepackage{geometry}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{listings}
+%Cool maths printing
+\usepackage{amsmath}
+%PseudoCode
+\usepackage{algorithm2e}
+\begin{document}
+	\section*{The Capacitated Lot Sizing Model}
+	\subsection*{Sets}
+	- $T$ = the planning horizon; (index $t=0,1,...,n$)
+	\subsection*{Parameters}
+	- $d_t$ = the demand forecast at time $t$;\\
+	
+	- $c_t$ =the unit production or purchasing cost at time $t$;\\
+	
+	- $h_t$ = the unit inventory cost at time $t$;\\
+	
+	- $K_t$ = the fixed setup or ordering cost at time $t$;\\
+	
+	- $C_t$ =the maximum feasible lot size (capacity) at time $t$;\\
+	\subsection*{Variables}
+	- $I_t$ = inventory level at the end of period $t$;\\
+	
+	- $q_t$ =quantity to be produced or ordered during period $t$;\\
+	$$y_t=
+	\bigg \{
+	\begin{array}{ll}
+	1\quad \text{if \,units\,of\, the\, product\, are\, manufactured\,/ ordered\, in\, period\,}\, t\\
+	0\quad \text{otherwise}\\
+	\end{array}
+	$$
+	\begin{equation}
+		\sum_{t=1}^{n}K_t\cdot y_t+c_t\cdot q_t+h_t\cdot I_t
+	\end{equation}
+	\begin{center}
+		s.t
+	\end{center}
+	\begin{equation}
+		I_t =0\qquad t=0\,\, \text{and}\,\, t=n
+	\end{equation}
+	\begin{equation}
+		q_t+I_{t-1}=d_t+I_t\qquad \forall t \in T\backslash\left\lbrace 0 \right\rbrace 
+	\end{equation}
+	\begin{equation}
+		q_t \leq C_t\cdot y_t \qquad \forall t \in T\backslash\left\lbrace 0 \right\rbrace 
+	\end{equation}
+	\begin{equation}
+		q_t\geq 0 \qquad \forall t \in T\backslash\left\lbrace 0 \right\rbrace 
+	\end{equation}
+	\begin{equation}
+		I_t \geq 0 \qquad \forall t \in T\backslash\left\lbrace 0 \right\rbrace 
+	\end{equation}
+	\begin{equation}
+		y_t \in \left\lbrace 0,1\right\rbrace \qquad \forall t \in T\backslash\left\lbrace 0 \right\rbrace 
+	\end{equation}
+	\\
+	The objective function (1) represents the total management costs, including the production
+	(and/or purchasing), inventory and setup or ordering costs.\\
+	\\
+	Conditions (2) impose that inventory levels at the beginning and the end of the planning horizon are equal to zero. \\
+	\\
+	Constraints (3) reproduce the
+	demand satisfaction and inventory balance constraint for each period. \\
+	\\
+	Constraints (4)-(5) allow a positive production (constrained between $0$ and a value $C_t$) in period $t$ if and only if the setup variable is equal to 1. \\
+	\\
+	In particular, the problem turns out to be uncapacitated for large values of $C_t$\,:
+	\begin{equation*}
+		C_t \geq \sum_{t\in T}d_t
+	\end{equation*}
+	\\
+	Constraints (6)-(7) express the non-negativity and binary restrictions on $I_t$ and $y_t$ the variables.
+	As known,model (1)-(7) has $\theta (n)$ constraints in $\theta (n)$ variables.
+	
+\end{document}
